@@ -1,0 +1,51 @@
+{
+  "name": "netdata",
+  "description": "Compile and installs netdata",
+  "long_description": "NetData Cookbook\n================\n\n[![Build Status](https://travis-ci.org/sergiopena/netdata-cookbook.svg?branch=master)](https://travis-ci.org/sergiopena/netdata-cookbook)\n[![NetData Cookbook](http://img.shields.io/badge/cookbook-v0.1.9-blue.svg?style=flat)](https://supermarket.chef.io/cookbooks/netdata)\n[![Chef Version](http://img.shields.io/badge/chef-v12.9.38-orange.svg?style=flat)](https://www.chef.io)\n\nThis cookbook provides a way to download and install NetData from FireHol, a real-time performance monitoring.\n\nLive demo: http://netdata.firehol.org\n\nGithub: https://github.com/firehol/netdata\n\nRequirements\n------------\n\n### Platforms\n\n- Centos => 6.7\n- Ubuntu > 14.04\n\n### Chef\n\n- Chef 12.0 or later\n\n### Cookbooks\n\n- `yum-epel` = 0.7.0\n\nRecipes\n-------\n\n### netdata::default\n\nThis would install NetData on supported platforms. At the moment this product does not have any distribution packages and the only supported installation method is to compile sources.\n\nNetData cookbook will install required dependencies and after compilation succeeds those deps will be removed, except those packages that already were installed on the server prior to chef run.\n\n## Usage\n\n### netdata::default\n\nJust include `netdata` in your node's `run_list`\n\n```json\n{\n  \"name\":\"my_node\",\n  \"run_list\": [\n    \"recipe[netdata]\"\n  ]\n}\n```\n\n## Attributes\n\n- `node['netdata']['source']['git_repository']` - Netdata git repository. Defaults to https://github.com/firehol/netdata.git\n- `node['netdata']['source']['git_revision']` - Netdata repository git reference. Can be a tag, branch or master. Defaults to master.\n- `node['netdata']['source']['directory']` - Local directory where the netdata repo will be cloned. Defaults to /tmp/netdata but should be replaced because most UNIX system periodically clean the /tmp directory.\n\n- `node['netdata']['plugins']['python']['mysql']['enabled']` - False by default. If set to true installs all needed python dependencies to connect to MySQL.\n\n## Resources\n\n### netdata_nginx_conf\n\nConfigures the netdata python nginx configuration.\n\n```ruby\njobs_config = {\n  'localhost' => {\n    'name' => 'local',\n    'url' => 'http://localhost/stub_status'\n  },\n  'localipv4' => {\n    'name' => 'local',\n    'url' => 'http://127.0.0.1/stub_status'\n  }\n}\nnetdata_nginx_conf 'default_config' do\n  jobs jobs_config\nend\n```\n\nTo test using `ChefSpec` you can use the provided matcher `configure_netdata_nginx_module`.\n\n```ruby\nit 'does something' do\n  expect(chef_run.converge(described_recipe)).to configure_netdata_nginx_module('some_config')\nend\n```\n\n## Contributing\n\n1. Fork the repository on Github\n2. Create a named feature branch (like `add_component_x`)\n3. Write your change\n4. Write tests for your change (if applicable)\n5. Run the tests, ensuring they all pass\n6. Submit a Pull Request using Github\n\n## License and Authors\n\nAuthors:\n* Sergio Pena https://github.com/sergiopena\n* João Madureira https://github.com/jmadureira\n",
+  "maintainer": "Sergio Pena",
+  "maintainer_email": "kekio.one@gmail.com",
+  "license": "Apache 2.0",
+  "platforms": {
+
+  },
+  "dependencies": {
+    "yum-epel": ">= 0.0.0"
+  },
+  "recommendations": {
+
+  },
+  "suggestions": {
+
+  },
+  "conflicting": {
+
+  },
+  "providing": {
+
+  },
+  "replacing": {
+
+  },
+  "attributes": {
+
+  },
+  "groupings": {
+
+  },
+  "recipes": {
+
+  },
+  "version": "0.1.9",
+  "source_url": "https://github.com/sergiopena/netdata-cookbook",
+  "issues_url": "https://github.com/sergiopena/netdata-cookbook/issues",
+  "privacy": false,
+  "chef_versions": [
+
+  ],
+  "ohai_versions": [
+
+  ],
+  "gems": [
+
+  ]
+}

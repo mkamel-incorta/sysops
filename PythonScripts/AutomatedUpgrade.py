@@ -1,10 +1,10 @@
 ## Script Written By Mohamed Khaled Aug 3rd 2017 ########
 # Script Upgrades the current Running Incorta    ########
-# usage is python AutomatedUpgrade.py  "/home/incorta/IncortaAnalytics" "incorta-installer.jar" #########
+# usage is python AutomatedUpgrade.py  "/home/incorta/IncortaAnalytics" "Incorta-Source-Dir" #########
 #########################################################
 import os , sys, getopt
 installpath = sys.argv[1]
-sourcejar = sys.argv[2]
+sourcedir = sys.argv[2]
 #def main(argv):
 #   try:
 #      opts, args = getopt.getopt(argv,"h:p:s:")
@@ -18,11 +18,14 @@ sourcejar = sys.argv[2]
 #      elif opt in ("-p"):
 #         installpath = arg
 #      elif opt in ("-s"):
-#         sourcejar = arg
+#         sourcedir = arg
 #if __name__ == "__main__":
 #   main(sys.argv[1:])
 
-cmd = "java -jar "+sourcejar+" < .upgrade.rsp"
+stopCmd = 'sh "'+installpath+'/stop.sh" && ps -ef | grep "'+installpath+'/" | cut -c 10-15 | xargs kill -9 '
+unzipCmd = 'unzip -o "'+sourcedir+'"/incorta-package.zip'
+cmd = 'java -jar "'+sourcedir+'"/incorta-installer.jar < .upgrade.rsp'
+startCmd= 'sh "'+installpath+'/start.sh"'
 respfile = open(".upgrade.rsp","w+")
 respfile.write("\r\n")
 respfile.write("\r\n")
@@ -34,6 +37,8 @@ respfile.write("\r\n")
 respfile.write("3\r\n")
 respfile.write("\r\n")
 respfile.close()
+os.system(stopCmd)
+os.system(unzipCmd)
 os.system(cmd)
-#os.system("java -jar incorta-installer.jar < .upgrade.rsp")
+os.system(startCmd)
 os.system("rm -rf  .upgrade.rsp")

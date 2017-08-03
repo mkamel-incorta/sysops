@@ -1,21 +1,22 @@
 import os , sys, getopt
-installpath = ''
-sourcejar = ''
-def main(argv):
-   try:
-      opts, args = getopt.getopt(argv,"h:p:s")
-   except getopt.GetoptError:
-      print 'test.py -p <installPath> -s <incorta-installer.jar localtion>'
-      sys.exit(2)
-   for opt, arg in opts:
-      if opt == '-h':
-         print 'test.py -p <installPath>'
-         sys.exit()
-      elif opt in ("-p"):
-         installpath = arg
-      elif opt in ("-s"):
-         sourcejar = arg
- print 'Value is ," '  sourcejar      
+installpath = sys.argv[1]
+sourcejar = sys.argv[2]
+#def main(argv):
+#   try:
+#      opts, args = getopt.getopt(argv,"h:p:s:")
+#   except getopt.GetoptError:
+#      print 'test.py -p <installPath> -s <incorta-installer.jar localtion>'
+#      sys.exit(2)
+#   for opt, arg in opts:
+#      if opt == '-h':
+#         print 'test.py -p <installPath>'
+#         sys.exit()
+#      elif opt in ("-p"):
+#         installpath = arg
+#      elif opt in ("-s"):
+#         sourcejar = arg
+#if __name__ == "__main__":
+#   main(sys.argv[1:])
 
 cmd = "java -jar "+sourcejar+" < .upgrade.rsp"
 respfile = open(".upgrade.rsp","w+")

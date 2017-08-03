@@ -23,7 +23,7 @@ sourcedir = sys.argv[2]
 #   main(sys.argv[1:])
 
 stopCmd = 'sh "'+installpath+'/stop.sh" && ps -ef | grep "'+installpath+'/" | cut -c 10-15 | xargs kill -9 '
-unzipCmd = 'unzip -o "'+sourcedir+'"/incorta-package.zip'
+unzipCmd = 'unzip -o "'+sourcedir+'"/incorta-package.zip -d "'+sourcedir+'"'
 cmd = 'java -jar "'+sourcedir+'"/incorta-installer.jar < .upgrade.rsp'
 startCmd= 'sh "'+installpath+'/start.sh"'
 respfile = open(".upgrade.rsp","w+")

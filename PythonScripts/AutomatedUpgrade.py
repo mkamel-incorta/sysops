@@ -13,9 +13,10 @@ def main(argv):
          sys.exit()
       elif opt in ("-p"):
          installpath = arg
-	  elif opt in ("-s"):
+      elif opt in ("-s"):
          sourcejar = arg
-      
+ print 'Value is ," '  sourcejar      
+
 cmd = "java -jar "+sourcejar+" < .upgrade.rsp"
 respfile = open(".upgrade.rsp","w+")
 respfile.write("\r\n")
@@ -28,5 +29,6 @@ respfile.write("\r\n")
 respfile.write("3\r\n")
 respfile.write("\r\n")
 respfile.close()
-os.system("java -jar incorta-installer.jar < .upgrade.rsp")
+os.system(cmd)
+#os.system("java -jar incorta-installer.jar < .upgrade.rsp")
 os.system("rm -rf  .upgrade.rsp")

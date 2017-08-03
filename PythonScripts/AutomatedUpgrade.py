@@ -1,3 +1,7 @@
+## Script Written By Mohamed Khaled Aug 3rd 2017 ########
+# Script Upgrades the current Running Incorta    ########
+# usage is python AutomatedUpgrade.py  "/home/incorta/IncortaAnalytics" "incorta-installer.jar" #########
+#########################################################
 import os , sys, getopt
 installpath = sys.argv[1]
 sourcejar = sys.argv[2]
